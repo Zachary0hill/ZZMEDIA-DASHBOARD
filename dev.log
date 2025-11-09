@@ -1,0 +1,281 @@
+
+> zzmedia-admin@0.1.0 dev
+> next dev --turbopack -p 3000
+
+   ▲ Next.js 15.5.4 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.4.31:3000
+
+ ✓ Starting...
+ ✓ Ready in 651ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1148ms
+ ✓ Compiled /api/kpis in 90ms
+ GET /api/kpis 200 in 338ms
+ GET / 200 in 1714ms
+ GET /api/kpis 200 in 229ms
+ GET / 200 in 293ms
+ GET /api/kpis 200 in 224ms
+ GET / 200 in 293ms
+ ✓ Compiled /_not-found/page in 135ms
+ GET /api/auth/session 404 in 196ms
+ POST /api/auth/_log 404 in 58ms
+ ✓ Compiled in 62ms
+ ✓ Compiled in 69ms
+ GET /api/kpis 200 in 226ms
+ GET / 200 in 402ms
+ GET /api/auth/session 404 in 167ms
+ ✓ Compiled /favicon.ico in 174ms
+ POST /api/auth/_log 404 in 64ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 418ms
+ ✓ Compiled /crm in 144ms
+ GET /crm 200 in 172ms
+ GET /api/kpis 200 in 224ms
+ GET / 200 in 257ms
+ ✓ Compiled in 57ms
+ ✓ Compiled in 31ms
+ ✓ Compiled / in 13ms
+ GET / 200 in 106ms
+ GET /crm 200 in 65ms
+ ✓ Compiled /projects in 120ms
+ GET /projects 200 in 143ms
+ GET /crm 200 in 29ms
+ GET /api/kpis 200 in 228ms
+ GET / 200 in 265ms
+ ✓ Compiled / in 12ms
+ GET / 200 in 98ms
+ GET /requests 404 in 29ms
+ GET /requests 404 in 49ms
+ GET /api/auth/session 404 in 51ms
+ GET /api/auth/session 404 in 65ms
+ POST /api/auth/_log 404 in 89ms
+ POST /api/auth/_log 404 in 47ms
+ GET /content 404 in 22ms
+ GET /content 404 in 41ms
+ GET /api/auth/session 404 in 54ms
+ GET /api/auth/session 404 in 55ms
+ POST /api/auth/_log 404 in 81ms
+ POST /api/auth/_log 404 in 70ms
+ GET /projects 200 in 24ms
+ GET /finance/proposals 404 in 23ms
+ GET /finance/proposals 404 in 78ms
+ GET /api/auth/session 404 in 63ms
+ GET /api/auth/session 404 in 62ms
+ POST /api/auth/_log 404 in 111ms
+ POST /api/auth/_log 404 in 95ms
+ ✓ Compiled /finance/invoices in 111ms
+ GET /finance/invoices 200 in 135ms
+ GET /finance/retainers 404 in 24ms
+ GET /finance/retainers 404 in 42ms
+ GET /api/auth/session 404 in 48ms
+ GET /api/auth/session 404 in 53ms
+ POST /api/auth/_log 404 in 77ms
+ POST /api/auth/_log 404 in 47ms
+ GET /finance/expenses 404 in 23ms
+ GET /finance/expenses 404 in 42ms
+ GET /api/auth/session 404 in 74ms
+ GET /api/auth/session 404 in 49ms
+ POST /api/auth/_log 404 in 75ms
+ POST /api/auth/_log 404 in 45ms
+ ✓ Compiled /finance/reports in 306ms
+ ⨯ TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__.createContext) is not a function
+    at __TURBOPACK__module__evaluation__ (src/app/finance/reports/page.tsx:1:1)
+    at __TURBOPACK__module__evaluation__ (.next/server/chunks/ssr/[root-of-the-server]__a6e0e186._.js:289:47)
+> 1 | import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaChart } from "recharts";
+    | ^
+  2 |
+  3 | const mrr = [
+  4 |   { m: "May", v: 28 }, {
+  page: '/finance/reports'
+}
+ GET /finance/rates 404 in 23ms
+ GET /finance/rates 404 in 41ms
+ GET /finance/reports 500 in 593ms
+ GET /api/auth/session 404 in 59ms
+ GET /api/auth/session 404 in 91ms
+ POST /api/auth/_log 404 in 86ms
+ POST /api/auth/_log 404 in 52ms
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 557ms
+ ⨯ TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__.createContext) is not a function
+    at __TURBOPACK__module__evaluation__ (src/app/finance/reports/page.tsx:1:1)
+    at __TURBOPACK__module__evaluation__ (.next/server/chunks/ssr/[root-of-the-server]__a6e0e186._.js:289:47)
+> 1 | import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaChart } from "recharts";
+    | ^
+  2 |
+  3 | const mrr = [
+  4 |   { m: "May", v: 28 }, {
+  page: '/finance/reports'
+}
+ GET /finance/reports 500 in 37ms
+ ⨯ TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__.createContext) is not a function
+    at __TURBOPACK__module__evaluation__ (src/app/finance/reports/page.tsx:1:1)
+    at __TURBOPACK__module__evaluation__ (.next/server/chunks/ssr/[root-of-the-server]__a6e0e186._.js:289:47)
+> 1 | import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaChart } from "recharts";
+    | ^
+  2 |
+  3 | const mrr = [
+  4 |   { m: "May", v: 28 }, {
+  page: '/finance/reports'
+}
+ GET /finance/reports 500 in 35ms
+ GET /finance/rates 404 in 45ms
+ GET /api/auth/session 404 in 54ms
+ GET /api/auth/session 404 in 77ms
+ POST /api/auth/_log 404 in 76ms
+ POST /api/auth/_log 404 in 46ms
+ GET /finance/proposals 404 in 25ms
+ GET /finance/proposals 404 in 42ms
+ GET /api/auth/session 404 in 54ms
+ GET /api/auth/session 404 in 63ms
+ POST /api/auth/_log 404 in 89ms
+ POST /api/auth/_log 404 in 80ms
+ GET /api/kpis 200 in 225ms
+ GET / 200 in 271ms
+ ✓ Compiled in 145ms
+ ✓ Compiled / in 13ms
+ GET / 200 in 92ms
+ ✓ Compiled in 37ms
+ ✓ Compiled in 33ms
+ ✓ Compiled / in 12ms
+ GET / 200 in 98ms
+ ✓ Compiled / in 12ms
+ GET / 200 in 101ms
+ ✓ Compiled / in 14ms
+ GET / 200 in 86ms
+ ✓ Compiled / in 12ms
+ GET / 200 in 97ms
+ ✓ Compiled / in 12ms
+ GET / 200 in 81ms
+ ✓ Compiled in 45ms
+ ✓ Compiled in 35ms
+ ✓ Compiled in 24ms
+ ✓ Compiled in 25ms
+ GET /crm 200 in 62ms
+ GET /projects 200 in 30ms
+ GET /content 404 in 26ms
+ GET /content 404 in 62ms
+ GET /api/auth/session 404 in 49ms
+ POST /api/auth/_log 404 in 43ms
+ GET /projects 200 in 22ms
+ GET /crm 200 in 26ms
+ GET /content 404 in 27ms
+ GET /content 404 in 46ms
+ GET /api/auth/session 404 in 49ms
+ POST /api/auth/_log 404 in 46ms
+ GET /requests 404 in 24ms
+ GET /requests 404 in 45ms
+ GET /api/auth/session 404 in 47ms
+ POST /api/auth/_log 404 in 45ms
+ GET /finance/proposals 404 in 27ms
+ GET /finance/proposals 404 in 43ms
+ GET /api/auth/session 404 in 49ms
+ POST /api/auth/_log 404 in 43ms
+ GET /finance/invoices 200 in 31ms
+ GET /finance/retainers 404 in 21ms
+ GET /finance/retainers 404 in 41ms
+ GET /api/auth/session 404 in 45ms
+ POST /api/auth/_log 404 in 45ms
+ GET /finance/expenses 404 in 23ms
+ GET /finance/expenses 404 in 41ms
+ GET /api/auth/session 404 in 49ms
+ POST /api/auth/_log 404 in 44ms
+ ⨯ TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__.createContext) is not a function
+    at __TURBOPACK__module__evaluation__ (src/app/finance/reports/page.tsx:1:1)
+    at __TURBOPACK__module__evaluation__ (.next/server/chunks/ssr/[root-of-the-server]__a6e0e186._.js:289:47)
+> 1 | import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaChart } from "recharts";
+    | ^
+  2 |
+  3 | const mrr = [
+  4 |   { m: "May", v: 28 }, {
+  page: '/finance/reports'
+}
+ GET /finance/reports 500 in 50ms
+ ⨯ TypeError: (0 , __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__.createContext) is not a function
+    at __TURBOPACK__module__evaluation__ (src/app/finance/reports/page.tsx:1:1)
+    at __TURBOPACK__module__evaluation__ (.next/server/chunks/ssr/[root-of-the-server]__a6e0e186._.js:289:47)
+> 1 | import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaChart } from "recharts";
+    | ^
+  2 |
+  3 | const mrr = [
+  4 |   { m: "May", v: 28 }, {
+  page: '/finance/reports'
+}
+ GET /finance/reports 500 in 38ms
+ GET /finance/expenses 404 in 44ms
+ GET /api/auth/session 404 in 47ms
+ POST /api/auth/_log 404 in 45ms
+ GET /crm 200 in 24ms
+ GET / 200 in 33ms
+ GET /automations/new 404 in 26ms
+ GET /automations/new 404 in 91ms
+ GET /api/auth/session 404 in 47ms
+ POST /api/auth/_log 404 in 45ms
+ ✓ Compiled /automations in 125ms
+ GET /automations 200 in 145ms
+ GET /integrations 404 in 26ms
+ GET /integrations 404 in 45ms
+ GET /api/auth/session 404 in 49ms
+ POST /api/auth/_log 404 in 42ms
+ GET /automations 200 in 27ms
+ GET /admin/audit 404 in 25ms
+ GET /admin/audit 404 in 44ms
+ GET /api/auth/session 404 in 47ms
+ POST /api/auth/_log 404 in 42ms
+ GET /admin/audit 404 in 22ms
+ GET /admin/audit 404 in 43ms
+ GET /api/auth/session 404 in 70ms
+ POST /api/auth/_log 404 in 45ms
+ GET / 200 in 38ms
+ GET /projects 200 in 27ms
+ GET / 200 in 29ms
+ GET /finance/invoices/new 404 in 22ms
+ GET /finance/invoices/new 404 in 44ms
+ GET /api/auth/session 404 in 49ms
+ POST /api/auth/_log 404 in 65ms
+ GET /finance/invoices 200 in 27ms
+ GET / 200 in 34ms
+ ✓ Compiled / in 17ms
+ GET / 200 in 147ms
+ GET /projects 200 in 36ms
+ GET / 200 in 48ms
+ GET /finance/invoices 200 in 34ms
+ GET / 200 in 45ms
+ GET /automations 200 in 33ms
+ GET / 200 in 32ms
+   Reload env: .env.local
+ GET / 200 in 85ms
+   Reload env: .env.local
+ GET / 200 in 569ms
+ GET / 200 in 72ms
+ GET / 200 in 69ms
+ ✓ Compiled / in 13ms
+ GET / 200 in 82ms
+ ✓ Compiled in 40ms
+ GET / 200 in 116ms
+ GET / 200 in 55ms
+ GET / 200 in 77ms
+ GET / 200 in 31ms
+[?25h
+
+> zzmedia-admin@0.1.0 dev
+> next dev --turbopack -p 3000
+
+   ▲ Next.js 15.5.4 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.81.198:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+
+> zzmedia-admin@0.1.0 dev
+> next dev --turbopack -p 3000
+
+   ▲ Next.js 15.5.4 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.81.198:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 378.9s
+[?25h

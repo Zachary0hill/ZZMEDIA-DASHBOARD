@@ -1,0 +1,72 @@
+{
+  "nav": [
+    { 
+      "label": "Home", 
+      "path": "/", 
+      "icon": "Home" 
+    },
+    {
+      "label": "Clients & Work",
+      "icon": "Briefcase",
+      "children": [
+        { "label": "CRM", "path": "/crm", "icon": "Users" },
+        { "label": "Projects", "path": "/projects", "icon": "FolderKanban" },
+        { "label": "Leads/Hot Prospects", "path": "/leads", "icon": "Flame" },
+        { "label": "Contact List/Email List", "path": "/contacts", "icon": "Mail" },
+        { "label": "Calendar", "path": "/calendar", "icon": "Calendar" }
+      ]
+    },
+    {
+      "label": "Finances",
+      "icon": "Wallet",
+      "children": [
+        { "label": "Invoices", "path": "/finance/invoices", "icon": "Receipt" },
+        { "label": "Expenses", "path": "/finance/expenses", "icon": "CreditCard" },
+        { "label": "Reports", "path": "/finance/reports", "icon": "BarChart3" },
+        { "label": "Subscriptions", "path": "/finance/subscriptions", "icon": "RefreshCcw" },
+        { "label": "Recurring Clients", "path": "/finance/retainers", "icon": "Repeat" }
+      ]
+    },
+    {
+      "label": "Operations & SOPs",
+      "icon": "Settings",
+      "children": [
+        { "label": "Equipment & Studio Catalog", "path": "/ops/equipment", "icon": "Camera" },
+        { "label": "Client Onboarding SOPs", "path": "/ops/onboarding", "icon": "UserCheck" },
+        { "label": "Workflow Templates", "path": "/ops/workflows", "icon": "Workflow" },
+        { "label": "Legal Documents & Contracts", "path": "/ops/legal", "icon": "FileCheck" },
+        { "label": "Team/Role Management", "path": "/ops/team", "icon": "Users2" }
+      ]
+    },
+    {
+      "label": "Marketing/Growth",
+      "icon": "TrendingUp",
+      "children": [
+        { "label": "Marketing Analytics", "path": "/growth/analytics", "icon": "PieChart" },
+        { "label": "Content Planner", "path": "/growth/content-planner", "icon": "Calendar" },
+        { "label": "Ad Campaigns & Ad Planner", "path": "/growth/ad-campaigns", "icon": "Target" },
+        { "label": "Funnels & Offers", "path": "/growth/funnels", "icon": "Filter" },
+        { "label": "Social Media Overview", "path": "/growth/social", "icon": "Share2" },
+        { "label": "Partnerships & Affiliates", "path": "/growth/partnerships", "icon": "Handshake" },
+        { "label": "Portfolio & Case Studies", "path": "/growth/portfolio", "icon": "Award" }
+      ]
+    },
+    {
+      "label": "Automations & Integrations",
+      "icon": "Zap",
+      "children": [
+        { "label": "AI Assistants/Agents Overview", "path": "/automations", "icon": "Bot" },
+        { "label": "Integrations", "path": "/integrations", "icon": "Plug" },
+        { "label": "API Management", "path": "/api-management", "icon": "Code" }
+      ]
+    },
+    {
+      "label": "Branding Assets",
+      "icon": "Palette",
+      "children": [
+        { "label": "Brand Editor", "path": "/branding/editor", "icon": "Paintbrush" },
+        { "label": "Backup/Export Data", "path": "/branding/backup", "icon": "Download" }
+      ]
+    }
+  ]
+}
