@@ -43,6 +43,8 @@ export function ClientDetailsModal({
 
   async function handleUpdate(e: React.FormEvent) {
     e.preventDefault();
+    // Guard against rare race where props become null after initial render.
+    if (!client) return;
     try {
       const res = await fetch(`/api/clients?id=${client.id}`, {
         method: "PATCH",
