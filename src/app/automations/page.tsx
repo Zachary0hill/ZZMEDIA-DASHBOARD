@@ -1,5 +1,5 @@
 "use client";
-import { automations } from "@/lib/fixtures/automations";
+import { automations, type Automation } from "@/lib/fixtures/automations";
 import { DataTable } from "@/components/DataTable";
 import { StatusBadge } from "@/components/StatusBadge";
 
@@ -8,7 +8,7 @@ export default function AutomationsPage() {
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold text-white">Automations</h1>
-      <DataTable
+      <DataTable<Automation>
         columns={[
           { key: "name", header: "Name" },
           { key: "trigger", header: "Trigger" },
@@ -16,7 +16,7 @@ export default function AutomationsPage() {
           { key: "lastRunAt", header: "Last Run" },
           { key: "errorCount", header: "Errors" },
         ]}
-        rows={data as any}
+        rows={data}
       />
     </div>
   );
