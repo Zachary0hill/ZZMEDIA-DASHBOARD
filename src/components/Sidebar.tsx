@@ -1,10 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import schema from "../navigation_schema.json";
 import { cn } from "@/lib/utils";
 import { useUIStore } from "@/store/app";
+import Image from "next/image";
 import {
   Home,
   Briefcase,
@@ -46,7 +47,7 @@ import {
 // Icon component mapper
 const IconComponent = ({ name, className }: { name?: string; className?: string }) => {
   if (!name) return null;
-  const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  const ICON_MAP: Record<string, ComponentType<{ className?: string }>> = {
     Home,
     Briefcase,
     Users,
@@ -92,6 +93,35 @@ export default function Sidebar() {
   const pathname = usePathname();
   const { sidebarOpen, navGroupsOpen, setNavGroupOpen, openOnlyNavGroup } = useUIStore();
   const [mounted, setMounted] = useState(false);
+  const [logoError, setLogoError] = useState(false);
+
+  // Types for navigation schema imported from JSON
+  type NavSingle = {
+    label: string;
+    path: string;
+    icon?: string;
+  };
+
+  type NavChild = {
+    label: string;
+    path: string;
+    icon?: string;
+    badge?: string | number;
+  };
+
+  type NavGroup = {
+    label: string;
+    icon?: string;
+    children: NavChild[];
+  };
+
+  type NavEntry = NavSingle | NavGroup;
+
+  type NavigationSchema = {
+    nav: NavEntry[];
+  };
+
+  const navSchema = schema as unknown as NavigationSchema;
 
   // Ensure client-only behaviors run after mount to avoid hydration mismatch
   useEffect(() => {
@@ -103,8 +133,8 @@ export default function Sidebar() {
     if (!mounted) return;
     
     let activeGroup: string | null = null;
-    schema.nav.forEach((item: any) => {
-      if (!item.path && item.children?.some((c: any) => c.path === pathname)) {
+    navSchema.nav.forEach((item) => {
+      if ("children" in item && item.children?.some((c) => c.path === pathname)) {
         activeGroup = item.label;
       }
     });
@@ -127,32 +157,34 @@ export default function Sidebar() {
       {/* Header */}
       <div className="flex-shrink-0 px-5 py-6 border-b border-white/10">
         <div className="flex items-center justify-center">
-          <img 
-            src="/logo.png" 
-            alt="ZZ Media Logo" 
-            className="h-10 w-auto object-contain"
-            onError={(e) => {
-              // Fallback to text if image fails to load
-              e.currentTarget.style.display = 'none';
-              const fallback = document.createElement('div');
-              fallback.className = 'text-sm font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent';
-              fallback.textContent = 'ZZ Media';
-              e.currentTarget.parentElement!.appendChild(fallback);
-            }}
-          />
+          {logoError ? (
+            <div className="text-sm font-bold bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
+              ZZ Media
+            </div>
+          ) : (
+            <Image
+              src="/logo.png"
+              alt="ZZ Media Logo"
+              width={160}
+              height={40}
+              className="h-10 w-auto object-contain"
+              onError={() => setLogoError(true)}
+              priority
+            />
+          )}
         </div>
       </div>
 
       {/* Scrollable Navigation */}
       <nav className="flex-1 overflow-y-auto overflow-x-hidden px-3 py-4 space-y-1 custom-scrollbar">
-        {schema.nav.map((item: any, idx: number) => {
+        {navSchema.nav.map((item, idx: number) => {
           // Single navigation item (no children)
-          if (item.path) {
-            const active = mounted && pathname === item.path;
+          if ("path" in item) {
+            const active = mounted && pathname === (item as NavSingle).path;
             return (
               <Link
                 key={idx}
-                href={item.path}
+                href={(item as NavSingle).path}
                 className={cn(
                   "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-bold transition-all relative overflow-hidden backdrop-blur-xl border",
                   active 
@@ -179,9 +211,10 @@ export default function Sidebar() {
           }
           
           // Navigation group (with children)
-          const isOpen = mounted && !!navGroupsOpen[item.label];
-          const hasActiveChild = mounted && item.children?.some((c: any) => c.path === pathname);
-          const childCount = item.children?.length || 0;
+          const group = item as NavGroup;
+          const isOpen = mounted && !!navGroupsOpen[group.label];
+          const hasActiveChild = mounted && group.children?.some((c) => c.path === pathname);
+          const childCount = group.children?.length || 0;
           
           return (
             <div key={idx} className="space-y-1">
@@ -189,12 +222,12 @@ export default function Sidebar() {
                 onClick={(e) => {
                   // Shift+Click allows keeping multiple groups open
                   if (e.shiftKey) {
-                    setNavGroupOpen(item.label, !isOpen);
+                    setNavGroupOpen(group.label, !isOpen);
                   } else {
                     if (isOpen) {
-                      setNavGroupOpen(item.label, false);
+                      setNavGroupOpen(group.label, false);
                     } else {
-                      openOnlyNavGroup(item.label);
+                      openOnlyNavGroup(group.label);
                     }
                   }
                 }}
@@ -237,7 +270,7 @@ export default function Sidebar() {
                   id={`nav-group-${idx}`} 
                   className="space-y-0.5 pl-3 animate-in slide-in-from-top-2 duration-200"
                 >
-                  {item.children?.map((child: any, i: number) => {
+                  {group.children?.map((child, i: number) => {
                     const active = mounted && pathname === child.path;
                     return (
                       <Link
