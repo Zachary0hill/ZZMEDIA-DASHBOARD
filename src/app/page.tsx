@@ -2,6 +2,7 @@ import Link from "next/link";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Money } from "@/components/Money";
 import nextDynamic from "next/dynamic";
+import { headers } from "next/headers";
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -64,8 +65,15 @@ export const revalidate = 0;
 
 async function fetchArray<T>(endpoint: string, label: string): Promise<T[]> {
   try {
-    // Use relative path so it works in any environment (Vercel, localhost, custom domains)
-    const res = await fetch(`${endpoint}`, {
+    // Build absolute URL for server-side fetch (RSC) while remaining env-agnostic.
+    // Prefer request headers (Vercel/Proxy), then env override, then localhost.
+    const hdrs = headers();
+    const proto = hdrs.get("x-forwarded-proto") || (process.env.NODE_ENV === "production" ? "https" : "http");
+    const host = hdrs.get("x-forwarded-host") || hdrs.get("host") || "localhost:3000";
+    const baseOverride = process.env.NEXT_PUBLIC_BASE_URL;
+    const baseUrl = baseOverride || `${proto}://${host}`;
+
+    const res = await fetch(`${baseUrl}${endpoint}`, {
       cache: "no-store",
       headers: {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
