@@ -2,31 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const year = Number(searchParams.get("year"));
-  const month = Number(searchParams.get("month")); // 1-12
-
+export async function GET(_req: NextRequest) {
   try {
-    let query = supabase
-      .from("expenses")
-      .select("id,date,category,vendor,description,amount,status")
-      .order("date", { ascending: false })
+    const { data, error } = await supabase
+      .from("subscriptions")
+      .select("id,created_at,vendor,name,amount,billing_cycle,renew_date,status,category")
+      .order("created_at", { ascending: false })
       .limit(2000);
-
-    if (year && month) {
-      const start = new Date(year, month - 1, 1);
-      const next = new Date(year, month, 1);
-      const from = start.toISOString().slice(0, 10);
-      const to = next.toISOString().slice(0, 10);
-      query = query.gte("date", from).lt("date", to);
-    }
-
-    const { data, error } = await query;
     if (error) throw error;
     return NextResponse.json(data ?? [], { status: 200 });
-  } catch (e) {
-    // Database errors should not leak details; return safe empty array
+  } catch (_e) {
     return NextResponse.json([], { status: 200 });
   }
 }
@@ -41,15 +26,16 @@ export async function POST(req: NextRequest) {
     }
     const body = await req.json();
     const { data, error } = await supabaseAdmin
-      .from("expenses")
+      .from("subscriptions")
       .insert([
         {
-          date: body.date ?? new Date().toISOString().slice(0, 10),
-          category: String(body.category ?? "other"),
           vendor: String(body.vendor ?? ""),
-          description: body.description ?? body.vendor ?? "",
+          name: body.name ?? null,
           amount: Number(body.amount ?? 0),
-          status: String(body.status ?? "paid"),
+          billing_cycle: String(body.billing_cycle ?? "monthly"),
+          renew_date: body.renew_date ?? null,
+          status: String(body.status ?? "active"),
+          category: body.category ?? null,
         },
       ])
       .select("*")
@@ -72,17 +58,18 @@ export async function PATCH(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
-    
+
     const body = await req.json();
     const { data, error } = await supabaseAdmin
-      .from("expenses")
+      .from("subscriptions")
       .update({
-        date: body.date ?? new Date().toISOString().slice(0, 10),
-        category: String(body.category ?? "other"),
-        vendor: String(body.vendor ?? ""),
-        description: body.description ?? body.vendor ?? "",
-        amount: Number(body.amount ?? 0),
-        status: String(body.status ?? "paid"),
+        vendor: body.vendor != null ? String(body.vendor) : undefined,
+        name: body.name ?? undefined,
+        amount: body.amount != null ? Number(body.amount) : undefined,
+        billing_cycle: body.billing_cycle != null ? String(body.billing_cycle) : undefined,
+        renew_date: body.renew_date ?? undefined,
+        status: body.status != null ? String(body.status) : undefined,
+        category: body.category ?? undefined,
       })
       .eq("id", id)
       .select("*")
@@ -105,7 +92,7 @@ export async function DELETE(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get("id");
     if (!id) return NextResponse.json({ error: "Missing id" }, { status: 400 });
-    const { error } = await supabaseAdmin.from("expenses").delete().eq("id", id);
+    const { error } = await supabaseAdmin.from("subscriptions").delete().eq("id", id);
     if (error) throw error;
     return NextResponse.json({ ok: true });
   } catch (e: any) {

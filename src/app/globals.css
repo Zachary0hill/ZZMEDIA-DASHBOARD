@@ -120,6 +120,40 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Fix dropdown option contrast */
+  select {
+    color-scheme: dark;
+    background-color: oklch(0.16 0 0) !important;
+  }
+  
+  select option {
+    background-color: oklch(0.16 0 0) !important;
+    color: oklch(0.985 0 0) !important;
+    padding: 8px 12px;
+  }
+  
+  select option:checked {
+    background: linear-gradient(0deg, oklch(0.488 0.243 264.376) 0%, oklch(0.488 0.243 264.376) 100%) !important;
+    color: oklch(0.985 0 0) !important;
+  }
+  
+  select option:hover {
+    background-color: oklch(0.22 0 0) !important;
+    color: oklch(0.985 0 0) !important;
+  }
+  
+  /* Firefox specific fixes */
+  @-moz-document url-prefix() {
+    select option {
+      background-color: #1a1a1a !important;
+      color: #fafafa !important;
+    }
+    select option:checked {
+      background-color: #7c3aed !important;
+      background: #7c3aed !important;
+    }
+  }
 }
 
 @layer utilities {
