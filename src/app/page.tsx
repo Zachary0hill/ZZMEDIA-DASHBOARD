@@ -2,7 +2,7 @@ import Link from "next/link";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Money } from "@/components/Money";
 import nextDynamic from "next/dynamic";
-import { headers } from "next/headers";
+import { headers as nextHeaders } from "next/headers";
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -67,7 +67,7 @@ async function fetchArray<T>(endpoint: string, label: string): Promise<T[]> {
   try {
     // Build absolute URL for server-side fetch (RSC) while remaining env-agnostic.
     // Prefer request headers (Vercel/Proxy), then env override, then localhost.
-    const hdrs = headers();
+    const hdrs = await nextHeaders();
     const proto = hdrs.get("x-forwarded-proto") || (process.env.NODE_ENV === "production" ? "https" : "http");
     const host = hdrs.get("x-forwarded-host") || hdrs.get("host") || "localhost:3000";
     const baseOverride = process.env.NEXT_PUBLIC_BASE_URL;
