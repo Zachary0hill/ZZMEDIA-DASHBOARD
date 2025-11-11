@@ -64,8 +64,8 @@ export const revalidate = 0;
 
 async function fetchArray<T>(endpoint: string, label: string): Promise<T[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-    const res = await fetch(`${baseUrl}${endpoint}`, {
+    // Use relative path so it works in any environment (Vercel, localhost, custom domains)
+    const res = await fetch(`${endpoint}`, {
       cache: "no-store",
       headers: {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
