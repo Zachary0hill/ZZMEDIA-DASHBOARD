@@ -72,8 +72,11 @@ async function fetchArray<T>(endpoint: string, label: string): Promise<T[]> {
     const host = hdrs.get("x-forwarded-host") || hdrs.get("host") || "localhost:3000";
     const baseOverride = process.env.NEXT_PUBLIC_BASE_URL;
     const baseUrl = baseOverride || `${proto}://${host}`;
+    const fullUrl = endpoint.startsWith("http")
+      ? endpoint
+      : new URL(endpoint, baseUrl).toString();
 
-    const res = await fetch(`${baseUrl}${endpoint}`, {
+    const res = await fetch(fullUrl, {
       cache: "no-store",
       headers: {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -81,14 +84,23 @@ async function fetchArray<T>(endpoint: string, label: string): Promise<T[]> {
       }
     });
     if (!res.ok) {
-      console.error(`${label} API returned:`, res.status);
+      console.error(`${label} API returned:`, res.status, 'url:', fullUrl, 'finalUrl:', (res as any).url || '');
       return [];
     }
     const contentType = res.headers.get('content-type') || '';
     if (!contentType.includes('application/json')) {
       // Avoid throwing on HTML/other responses (e.g., redirects)
-      const snippet = (await res.text().catch(() => '')).slice(0, 120);
-      console.error(`${label} API returned non-JSON:`, contentType, snippet);
+      const snippet = (await res.text().catch(() => '')).slice(0, 200);
+      const location = res.headers.get('location');
+      console.error(
+        `${label} API returned non-JSON:`,
+        contentType,
+        '| url:', fullUrl,
+        '| finalUrl:', (res as any).url || '',
+        '| redirected:', res.redirected,
+        '| location:', location || '',
+        '| body:', snippet
+      );
       return [];
     }
     const data: unknown = await res.json();
