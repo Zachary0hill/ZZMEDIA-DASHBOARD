@@ -2,12 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> },
+) {
   try {
     if (!supabaseAdmin) {
       return NextResponse.json({ error: "Missing SUPABASE_SERVICE_ROLE_KEY or NEXT_PUBLIC_SUPABASE_URL on server" }, { status: 500 });
     }
-    const workflowId = params.id;
+    const { id: workflowId } = await context.params;
     // Get current version for record
     const { data: wf, error: e1 } = await supabase
       .from("workflows")

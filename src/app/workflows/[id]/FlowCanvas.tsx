@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import ReactFlow, {
   Background,
+  BackgroundVariant,
   Controls,
   MiniMap,
   useEdgesState,
@@ -51,8 +52,8 @@ const fromRF = (nodes: RFNode[], edges: RFEdge[]): Graph => {
       id: e.id,
       source: e.source,
       target: e.target,
-      sourceHandle: e.sourceHandle,
-      targetHandle: e.targetHandle,
+      sourceHandle: e.sourceHandle ?? undefined,
+      targetHandle: e.targetHandle ?? undefined,
       condition: (e.data as any)?.condition,
     })),
   };
@@ -120,7 +121,7 @@ export default function FlowCanvas({ graph, onChange, onSelectNode }: Props) {
         onSelectionChange={onSelectionChange}
         fitView
       >
-        <Background variant="dots" gap={16} size={1} />
+        <Background variant={BackgroundVariant.Dots} gap={16} size={1} />
         <MiniMap pannable zoomable />
         <Controls />
       </ReactFlow>

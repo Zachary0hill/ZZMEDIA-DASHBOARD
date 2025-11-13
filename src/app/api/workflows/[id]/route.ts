@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
-export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  _: NextRequest,
+  context: { params: Promise<{ id: string }> },
+) {
   try {
-    const id = params.id;
+    const { id } = await context.params;
     const { data: wf, error: e1 } = await supabase
       .from("workflows")
       .select("id, name, slug, description, version, created_at, updated_at")
@@ -26,12 +29,15 @@ export async function GET(_: NextRequest, { params }: { params: { id: string } }
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> },
+) {
   try {
     if (!supabaseAdmin) {
       return NextResponse.json({ error: "Missing SUPABASE_SERVICE_ROLE_KEY or NEXT_PUBLIC_SUPABASE_URL on server" }, { status: 500 });
     }
-    const id = params.id;
+    const { id } = await context.params;
     const body = await req.json().catch(() => ({}));
     const updates: any = {};
     if (typeof body.name === "string") updates.name = body.name;
