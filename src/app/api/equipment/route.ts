@@ -6,7 +6,7 @@ export async function GET(_req: NextRequest) {
   try {
     const { data, error } = await supabase
       .from("equipment")
-      .select("id,created_at,name,category,serial_number,purchase_date,purchase_price,status,location,notes")
+      .select("id,created_at,name,category,serial_number,purchase_date,purchase_price,status,location,notes,image_url")
       .order("created_at", { ascending: false })
       .limit(2000);
     if (error) throw error;
@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
           status: String(body.status ?? "available"),
           location: body.location ?? null,
           notes: body.notes ?? null,
+          image_url: body.image_url ?? null,
         },
       ])
       .select("*")
@@ -72,6 +73,7 @@ export async function PATCH(req: NextRequest) {
         status: body.status != null ? String(body.status) : undefined,
         location: body.location ?? undefined,
         notes: body.notes ?? undefined,
+        image_url: body.image_url ?? undefined,
       })
       .eq("id", id)
       .select("*")

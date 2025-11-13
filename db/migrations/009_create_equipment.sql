@@ -9,7 +9,8 @@ create table if not exists public.equipment (
   purchase_price numeric(12,2),
   status text not null default 'available' check (status in ('available','in_use','maintenance','retired')),
   location text,
-  notes text
+  notes text,
+  image_url text
 );
 
 create index if not exists equipment_created_at_idx on public.equipment (created_at desc);
